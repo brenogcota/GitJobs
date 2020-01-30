@@ -35,10 +35,10 @@ export const SubmitButton = styled(RectButton)`
 export const List = styled.FlatList.attrs({
     showsVerticalScrollIndicator: false,
 })`
-    margin-top: 20px
+    margin-top: 20px;
 `;
 
-export const Repos =   styled.View`
+export const Repos = styled.View`
     align-items: center;
     margin: 0 20px 30px;
 `;
@@ -72,15 +72,15 @@ export const ProfileButton = styled(RectButton)`
     margin-top: 10px;
     align-self: stretch;
     border-radius: 4px;
-    background: #333;
+    background: #eee;
     justify-content: center;
-    align-itemns: center;
+    align-items: center;
     height: 36px;
 `;
 
 export const ProfileButtonText = styled.Text`
     font-size: 14px;
     font-weight: bold;
-    color: #FFF;
+    color: #000;
     text-transform: uppercase;
 `;

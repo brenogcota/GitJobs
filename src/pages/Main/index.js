@@ -8,7 +8,6 @@ import { Container, Form, Input, SubmitButton, List,
          Repos, Avatar, Name, Title, ProfileButton, ProfileButtonText
 } from './styles';
 
-import logo from '../../assets/logo.png';
 
 export default class Main extends Component {
 
@@ -20,19 +19,24 @@ export default class Main extends Component {
     handleSubmit = async () => {
         const { repos, newRepos } = this.state;
 
-        const response = await api.get(`/repos/${newRepos}/vagas/issues?state=open`);
+        const response = await api.get(`/repos/${newRepos}/vagas/issues`);
 
-        const data = {
-            title: response.data.title,
-            login: response.data.login,
-            avatar: response.data.avatar_url,
-        }
+        const arr= [];
+    
+        for (var i = 0; i < response.data.length; i++) {
 
-        this.setState({
-            repos: [...repos, data],
+            arr[i] = response.data[i].title;
+      
+         }
+
+         this.setState({
+            repos: arr,
             newRepos: '',
-        });
+         });
 
+         console.log('logcat  ' + arr + '\n');
+
+         
         Keyboard.dismiss();
     };
 
@@ -57,26 +61,15 @@ export default class Main extends Component {
                   </SubmitButton>
               </Form>
 
-              <List
-                data={repos}
-                keyExtractor={repos => repos.login}
-                renderItem={({ item }) => {
-                    <Repos>
-                        <Avatar source={{ uri: item.avatar }} />
-                        <Name>{ item.login }</Name>
-                        <Title>{ item.title }</Title>
-                        <ProfileButton onPress={() => {}}>
-                            <ProfileButtonText>
-                                Ver vaga
-                            </ProfileButtonText>
-                        </ProfileButton>
+            
+            {/*
+              * Parte de listagem não funciona ainda
+            
+            
+            */ }
+           
+      
 
-                    </Repos>
-                }}
-              /> 
-
-
-                
 
             </Container>
         );
@@ -85,5 +78,5 @@ export default class Main extends Component {
 }
 
 Main.navigationOptions = {
-    title: 'GitHub',
+    title: 'Github Jobs',
 }
