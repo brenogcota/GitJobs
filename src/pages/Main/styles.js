@@ -4,7 +4,7 @@ import { RectButton } from 'react-native-gesture-handler';
 export const Container = styled.View`
     flex: 1;
     padding: 30px;
-    background: #333;
+    background: #222;
 `;
 
 export const Form = styled.View`
@@ -44,6 +44,7 @@ export const Repos = styled.View`
 `;
 
 export const Avatar = styled.Image`
+    margin-top: 20px;
     width: 64px;
     height: 64px;
     border-radius: 32px;
@@ -65,6 +66,16 @@ export const Title = styled.Text.attrs({
     line-height: 18px;
     color: #FFF;
     margin-top: 5px;
+    text-align: center;
+`;
+
+export const Bio = styled.Text.attrs({
+    numberOfLines: 6,
+})`
+    font-size: 10px;
+    line-height: 18px;
+    color: #eee;
+    margin-top: 10px;
     text-align: center;
 `;
 
