@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     flex: 1;
     padding: 30px;
-    background: #222;
+    background: #444;
 `;
 
 export const Repos = styled.View`
@@ -20,25 +20,25 @@ export const Avatar = styled.Image`
 `;
 
 export const Name = styled.Text`
-    font-size: 24px;
-    color: #FFF;
+    font-size: 16px;
+    color: #ccc;
     font-weight: bold;
     margin-top: 8px;
     text-align: center;
 `;
 
 export const Title = styled.Text`
-    font-size: 16px;
+    font-size: 18px;
     line-height: 18px;
     color: #FFF;
-    margin-top: 8px;
+    margin-top: 12px;
     text-align: center;
 `;
 
 export const Bio = styled.Text`
     font-size: 14px;
     line-height: 18px;
-    color: #eee;
-    margin-top: 10px;
+    color: #FFF;
+    margin-top: 36px;
     text-align: center;
 `;

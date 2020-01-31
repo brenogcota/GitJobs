@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import api from '../../services/api';
 
 import { Container, Form, Input, SubmitButton, Bio,
-         Repos, Avatar, Name, Title, ProfileButton, ProfileButtonText
+         Repos, Avatar, Name, Title, State, ProfileButton, ProfileButtonText
 } from './styles';
 
 
@@ -14,6 +14,7 @@ export default class Main extends Component {
 
     static navigationOptions = {
         title: 'Github Jobs',
+        headerTitleAlign: 'center',
     };
 
     static propTyps = {
@@ -41,30 +42,25 @@ export default class Main extends Component {
             const userRef = response.data[i].user;
 
             arr[i] = {
+                id: response.data[i].id,
+                state: response.data[i].state,
                 title: response.data[i].title,
                 body: response.data[i].body,
                 login: userRef.login,
                 avatar: userRef.avatar_url,
             };
 
-            /*
-                *Os dados são retornados porém ainda não são listados na tela da forma correta
-            */
-
-         }
+         };
 
 
          this.setState({
             repos: [arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], arr[10],
                     arr[11], arr[12], arr[13], arr[14], arr[15], arr[16], arr[17], arr[18], arr[19], arr[20],
-                    arr[21], arr[22], arr[23], arr[24], arr[25], arr[26], arr[27], arr[28], arr[29], arr[20]
+                    arr[21], arr[22], arr[23], arr[24], arr[25], arr[26], arr[27], arr[28], arr[29]
                    ],
             newRepos: '',
         });
 
-         console.log('logcat  ' + response.data.length);
-
-         
         Keyboard.dismiss();
     };
 
@@ -73,7 +69,7 @@ export default class Main extends Component {
         const { navigation } = this.props;
 
         navigation.navigate('User', { repo });
-    }
+    };
 
     render(){
 
@@ -85,7 +81,7 @@ export default class Main extends Component {
                   <Input 
                     autoCorrect={false}
                     autoCapitalize="none"
-                    placeholder="Busque por frontendbr ou backend-br"
+                    placeholder="frontendbr | backend-br | react-brasil"
                     value={newRepos}
                     onChangeText={text => this.setState({ newRepos: text })}
                     returnKeyType="send"
@@ -94,44 +90,32 @@ export default class Main extends Component {
                   <SubmitButton onPress={this.handleSubmit}>
                     <Icon name="github" size={25} color="#000" />
                   </SubmitButton>
-              </Form>
+              </Form>  
 
-            
-            {/*
-              * Parte de listagem não funciona ainda
-            
-            
-            */ }
-
-            
-
-            <SafeAreaView>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                     { repos.map(repo => (
-                        <Repos>
-                            <Avatar source={{ uri: repo.avatar }} />
-                            <Name>{ repo.login }</Name>
-                            <Title>
-                                {repo.title}
-                            </Title>
-                            <Bio>
-                                {repo.body}
-                            </Bio>
-                            <ProfileButton onPress={ () => {
-                                this.handleNavigate(repo)
-                              }}
-                            >
-                                <ProfileButtonText>Ver Vaga</ProfileButtonText>
-                            </ProfileButton>
-                        </Repos>
-                      ))  
-                     } 
-                 </ScrollView>
-            </SafeAreaView>
-              
-           
-      
-
+                <SafeAreaView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        { repos.map(repo => (
+                            <Repos key={ repo.id }>
+                                <Avatar source={{ uri: repo.avatar }} />
+                                <Name>{ repo.login }</Name>
+                                <Title>
+                                    {repo.title}
+                                </Title>
+                                <State> {repo.state}</State>
+                                <Bio>
+                                    {repo.body}
+                                </Bio>
+                                <ProfileButton onPress={ () => {
+                                    this.handleNavigate(repo)
+                                }}
+                                >
+                                    <ProfileButtonText>Ver Vaga</ProfileButtonText>
+                                </ProfileButton>
+                            </Repos>
+                        ))  
+                        } 
+                    </ScrollView>
+                </SafeAreaView>
 
             </Container>
         );

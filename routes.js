@@ -10,7 +10,6 @@ const Routes = createAppContainer(
         User
     }, 
     {
-        headerLayoutPreset: 'center',
         defaultNavigationOptions: {
             headerStyle: {
                 backgroundColor: '#000',    
