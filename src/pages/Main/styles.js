@@ -107,3 +107,40 @@ export const ProfileButtonText = styled.Text`
     color: #000;
     text-transform: uppercase;
 `;
+
+export const ViewContent = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`;
+
+
+export const Image = styled.Image`
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+`;
+
+export const Message = styled.Text`
+    font-size: 16px;
+    color: #ddd;
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+`;
+
+export const Footer = styled.View`
+    position: absolute;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+`;
+
+export const TextFooter = styled.Text`
+    margin-right: 10px;
+    font-size: 9px;
+    color: #ccc;
+    text-align: center;
+`;

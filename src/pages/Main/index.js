@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Keyboard,  SafeAreaView, ScrollView } from 'react-native';
+import { Keyboard,  SafeAreaView, ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import api from '../../services/api';
 
+import logo from '../../assets/logo.png';
 import { Container, Form, Input, SubmitButton, Bio,
-         Repos, Avatar, Name, Title, State, ProfileButton, ProfileButtonText
+         Repos, Avatar, Name, Title, State, ProfileButton, ProfileButtonText, Image, Message, ViewContent,
+         Footer, TextFooter
 } from './styles';
 
 
@@ -52,14 +54,20 @@ export default class Main extends Component {
 
          };
 
+         arr.map(ar => (
+             this.setState({
+                repos: [...this.state.repos, ar],
+             })
+         ));
 
-         this.setState({
+
+         {/*this.setState({
             repos: [arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], arr[10],
                     arr[11], arr[12], arr[13], arr[14], arr[15], arr[16], arr[17], arr[18], arr[19], arr[20],
                     arr[21], arr[22], arr[23], arr[24], arr[25], arr[26], arr[27], arr[28], arr[29]
                    ],
             newRepos: '',
-        });
+        }); */}
 
         Keyboard.dismiss();
     };
@@ -81,41 +89,55 @@ export default class Main extends Component {
                   <Input 
                     autoCorrect={false}
                     autoCapitalize="none"
-                    placeholder="frontendbr | backend-br | react-brasil"
+                    placeholder="Buscar"
                     value={newRepos}
                     onChangeText={text => this.setState({ newRepos: text })}
                     returnKeyType="send"
                     onSubmitEditing={this.handleSubmit}
                   />
                   <SubmitButton onPress={this.handleSubmit}>
-                    <Icon name="github" size={25} color="#000" />
+                    <Icon name="check" size={25} color="#5ac18e" />
                   </SubmitButton>
               </Form>  
 
-                <SafeAreaView>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        { repos.map(repo => (
-                            <Repos key={ repo.id }>
-                                <Avatar source={{ uri: repo.avatar }} />
-                                <Name>{ repo.login }</Name>
-                                <Title>
-                                    {repo.title}
-                                </Title>
-                                <State> {repo.state}</State>
-                                <Bio>
-                                    {repo.body}
-                                </Bio>
-                                <ProfileButton onPress={ () => {
-                                    this.handleNavigate(repo)
-                                }}
-                                >
-                                    <ProfileButtonText>Ver Vaga</ProfileButtonText>
-                                </ProfileButton>
-                            </Repos>
-                        ))  
-                        } 
-                    </ScrollView>
-                </SafeAreaView>
+               {
+                  repos == '' ? 
+                    <ViewContent>
+                        <Image source={logo}></Image>
+                        <Message> Busque por um dos repositórios abaixo. </Message>
+                        <Name> frontendbr | backend-br | react-brasil | vuejs-br</Name>
+                        <Footer>
+                            <TextFooter>
+                              developed by brenogcota
+                            </TextFooter>
+                        </Footer>
+                    </ViewContent>
+                  :
+                    <SafeAreaView>
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            { repos.map(repo => (
+                                <Repos key={ repo.id }>
+                                    <Avatar source={{ uri: repo.avatar }} />
+                                    <Name>{ repo.login }</Name>
+                                    <Title>
+                                        {repo.title}
+                                    </Title>
+                                    <State> {repo.state}</State>
+                                    <Bio>
+                                        {repo.body}
+                                    </Bio>
+                                    <ProfileButton onPress={ () => {
+                                        this.handleNavigate(repo)
+                                    }}
+                                    >
+                                        <ProfileButtonText>Ver Vaga</ProfileButtonText>
+                                    </ProfileButton>
+                                </Repos>
+                            ))  
+                            } 
+                        </ScrollView>
+                    </SafeAreaView>
+               }
 
             </Container>
         );
