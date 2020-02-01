@@ -31,6 +31,7 @@ export default class Main extends Component {
     };
 
     handleSubmit = async () => {
+        Keyboard.dismiss();
 
         const { repos, newRepos } = this.state;
 
@@ -69,7 +70,7 @@ export default class Main extends Component {
             newRepos: '',
         }); */}
 
-        Keyboard.dismiss();
+        
     };
 
 
@@ -96,7 +97,7 @@ export default class Main extends Component {
                     onSubmitEditing={this.handleSubmit}
                   />
                   <SubmitButton onPress={this.handleSubmit}>
-                    <Icon name="check" size={25} color="#5ac18e" />
+                    <Icon name="check" size={20} color="#5ac18e" />
                   </SubmitButton>
               </Form>  
 
