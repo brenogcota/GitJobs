@@ -32,8 +32,12 @@ export default class Main extends Component {
 
     handleSubmit = async () => {
         Keyboard.dismiss();
+        
 
         const { repos, newRepos } = this.state;
+        this.setState({
+            repos: [],
+        });
 
         const response = await api.get(`/repos/${newRepos}/vagas/issues`);
 
@@ -58,6 +62,7 @@ export default class Main extends Component {
          arr.map(ar => (
              this.setState({
                 repos: [...this.state.repos, ar],
+                newRepos: '',
              })
          ));
 
@@ -106,7 +111,7 @@ export default class Main extends Component {
                     <ViewContent>
                         <Image source={logo}></Image>
                         <Message> Busque por um dos repositórios abaixo. </Message>
-                        <Name> frontendbr | backend-br | react-brasil | vuejs-br</Name>
+                        <Name> frontendbr | backend-br | react-brasil | vuejs-br   baixada | phpdevbr | androiddevbr</Name>
                         <Footer>
                             <TextFooter>
                               developed by brenogcota
